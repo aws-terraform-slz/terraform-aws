@@ -38,7 +38,7 @@ jobs:
       ref: feature/actions
       local-execution-mode: true
       setup-python: true
-      python-version: "3.9"
+      python-version: "3.11"
     secrets:
       tf-token: ${{ secrets.TF_TOKEN }}
       terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
