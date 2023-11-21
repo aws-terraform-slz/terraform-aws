@@ -34,7 +34,7 @@ on:
         required: true
         type: string
       local-execution-mode:
-        required: false
+        required: true
         type: boolean
       setup-python:
         required: false
