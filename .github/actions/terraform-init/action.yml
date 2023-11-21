@@ -36,10 +36,10 @@ runs:
         terraform_wrapper: ${{ inputs.terraform-wrapper }}
     - name: Check Secret Availability
       run: |
-        if [ -z "${{ secrets.terraform-execution-iam-plan-role-arn }}" ]; then
+        if [ -z "${{ inputs.terraform-execution-iam-plan-role-arn }}" ]; then
           echo "Secret is NOT set."
         else
-          echo "Secret is set: ${{ secrets.terraform-execution-iam-plan-role-arn }}"
+          echo "Secret is set: ${{ inputs.terraform-execution-iam-plan-role-arn }}"
         fi
 
     - name: Configure AWS Credentials
