@@ -34,6 +34,14 @@ runs:
       with:
         terraform_version: ${{ inputs.tf-version }}
         terraform_wrapper: ${{ inputs.terraform-wrapper }}
+    - name: Check Secret Availability
+      run: |
+        if [ -z "${{ secrets.terraform-execution-iam-plan-role-arn }}" ]; then
+          echo "Secret is NOT set."
+        else
+          echo "Secret is set: ${{ secrets.terraform-execution-iam-plan-role-arn }}"
+        fi
+
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       if: ${{ inputs.local-execution-mode == 'true' }}
