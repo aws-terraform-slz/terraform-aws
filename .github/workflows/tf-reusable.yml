@@ -15,15 +15,15 @@ on:
       tf-version:
         required: true
         type: string
-      tf-organization:
-        required: true
-        type: string
-      tf-hostname:
-        required: true
-        type: string
-      tf-workspace:
-        required: true
-        type: string
+      # tf-organization:
+      #   required: true
+      #   type: string
+      # tf-hostname:
+      #   required: true
+      #   type: string
+      # tf-workspace:
+      #   required: true
+      #   type: string
       aws-region:
         required: true
         type: string
