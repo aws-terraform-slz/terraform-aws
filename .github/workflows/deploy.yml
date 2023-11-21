@@ -27,7 +27,7 @@ concurrency:
 jobs:
   deploy-dev:
     name: Dev Deployment
-    uses: aws-terraform-slz/terraform-aws/.github/workflows/terraform-reusable.yml
+    uses: ./.github/workflows/tf-usable.yml
     with:
       deploy: true
       tf-version: ${{ vars.TF_VERSION }}
