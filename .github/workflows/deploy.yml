@@ -36,7 +36,7 @@ jobs:
       tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
       environment: "dev"
-      ref: "feature/actions"
+      ref: feature/actions
       local-execution-mode: true
       setup-python: true
       python-version: "3.11"
