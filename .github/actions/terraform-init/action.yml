@@ -34,14 +34,11 @@ runs:
       with:
         terraform_version: ${{ inputs.tf-version }}
         terraform_wrapper: ${{ inputs.terraform-wrapper }}
-    - name: Check Secret Availability
-      shell: bash
-      run: |
-        if [ -z "${{ inputs.terraform-execution-iam-plan-role-arn }}" ]; then
-          echo "Secret is NOT set."
-        else
-          echo "Secret is set: ${{ inputs.terraform-execution-iam-plan-role-arn }}"
-        fi
+    - name: "check is MY_SECRET exists"
+      env: 
+          super_secret: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
+      if: ${{ env.super_secret == '' }}
+      run: 'echo "echo the secret \"MY_SECRET\" has not been made; echo please go to \"settings \> secrets \> actions\" to create it"'
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
