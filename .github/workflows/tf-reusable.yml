@@ -60,13 +60,13 @@ defaults:
   run:
     shell: bash
 
-env:
-  TF_CLOUD_ORGANIZATION: ${{ inputs.tf-organization}}
-  TF_CLOUD_HOSTNAME: ${{ inputs.tf-hostname }}
-  TF_WORKSPACE: ${{ inputs.tf-workspace }}
-  # For Terraform Enterprise, change the domain name in the TF_TOKEN_app_terraform_io variable
-  # like documented in https://developer.hashicorp.com/terraform/cli/config/config-file#environment-variable-credentials
-  TF_TOKEN_app_terraform_io: ${{ secrets.tf-token }}
+# env:
+#   TF_CLOUD_ORGANIZATION: ${{ inputs.tf-organization}}
+#   TF_CLOUD_HOSTNAME: ${{ inputs.tf-hostname }}
+#   TF_WORKSPACE: ${{ inputs.tf-workspace }}
+#   # For Terraform Enterprise, change the domain name in the TF_TOKEN_app_terraform_io variable
+#   # like documented in https://developer.hashicorp.com/terraform/cli/config/config-file#environment-variable-credentials
+#   TF_TOKEN_app_terraform_io: ${{ secrets.tf-token }}
 
 jobs:
   terraform-plan:
@@ -75,6 +75,11 @@ jobs:
     outputs:
       exitcode: ${{ steps.plan.outputs.exitcode }}
     steps:
+      - name: "check is MY_SECRET exists"
+        env: 
+            super_secret: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
+        if: ${{ env.super_secret == '' }}
+        run: 'echo "echo the secret \"MY_SECRET\" has not been made; echo please go to \"settings \> secrets \> actions\" to create it"'
       - name: Checkout
         uses: actions/checkout@v4
       - name: Checkout composite actions

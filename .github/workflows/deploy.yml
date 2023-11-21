@@ -19,7 +19,7 @@ on:
     paths:
       - "**.tf*"
       - ".github/workflows/deploy.yml"
-      # - ".github/workflows/tf-reusable.yml"
+      - ".github/workflows/tf-reusable.yml"
 
 concurrency:
   group: ${{ github.ref }}
