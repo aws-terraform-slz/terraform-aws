@@ -35,6 +35,7 @@ runs:
         terraform_version: ${{ inputs.tf-version }}
         terraform_wrapper: ${{ inputs.terraform-wrapper }}
     - name: Check Secret Availability
+      shell: bash
       run: |
         if [ -z "${{ inputs.terraform-execution-iam-plan-role-arn }}" ]; then
           echo "Secret is NOT set."
