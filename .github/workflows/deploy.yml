@@ -32,7 +32,7 @@ jobs:
     with:
       deploy: true
       tf-version: ${{ vars.TF_VERSION }}
-      tf-workspace: ${{ vars.APP_NAME }}-dev
+      # tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
       environment: "dev"
       ref: feature/actions
