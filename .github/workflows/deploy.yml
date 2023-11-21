@@ -32,8 +32,6 @@ jobs:
     with:
       deploy: true
       tf-version: ${{ vars.TF_VERSION }}
-      tf-organization: ${{ vars.TF_ORGANIZATION }}
-      tf-hostname: ${{ vars.TF_HOSTNAME }}
       tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
       environment: "dev"

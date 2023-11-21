@@ -77,7 +77,7 @@ jobs:
     steps:
       - name: "check is MY_SECRET exists"
         env: 
-            super_secret: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
+            super_secret: ${{ secrets.terraform-execution-iam-plan-role-arn }}
         if: ${{ env.super_secret == '' }}
         run: 'echo "echo the secret \"MY_SECRET\" has not been made; echo please go to \"settings \> secrets \> actions\" to create it"'
       - name: Checkout
