@@ -36,7 +36,7 @@ jobs:
       aws-region: "us-east-1"
       environment: "dev"
       tf-directory: "01-slz"
-      app-directory: ""
+      app-directory: "a"
       ref: feature/actions
       local-execution-mode: true
     secrets:
