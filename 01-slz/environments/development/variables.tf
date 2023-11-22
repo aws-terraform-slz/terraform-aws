@@ -5,7 +5,7 @@ variable "aws_availability_zones" {
 
 variable "aws_region" {
   type        = string
-  description = "AWS region such as 'ap-southeast-1' (Singapore)"
+  description = "AWS region such as 'us-east-1' (N. Virginia)"
   default     = "us-east-1"
 }
 
