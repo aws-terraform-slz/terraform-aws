@@ -19,6 +19,9 @@ inputs:
   extra-args:
     required: false
     description: "Terraform plan command extra arguments"
+  tf-directory:
+      required: false
+      description: "Working directory"
 outputs:
   exitcode:
     description: "Terraform Plan Exit code"
@@ -56,7 +59,7 @@ runs:
       shell: bash
       run: |
         ${{ steps.tf_plan_command.outputs.PLAN_COMMAND }} \
-          -var-file=environments/${{ inputs.environment }}/terraform.tfvars \
+          -var-file=${{ inputs.tf-directory }}/terraform.tfvars \
           -var="region=${{ inputs.aws-region }}" \
           -var="environment=${{ inputs.environment }}" \
           -no-color \
