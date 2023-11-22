@@ -10,7 +10,7 @@ terraform {
 
   backend "s3" {
     bucket = "aws-slz"
-    key    = "network/dev"
+    key    = "network/dev/"
     region = "us-east-1"
   }
 }
