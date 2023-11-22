@@ -60,7 +60,7 @@ runs:
       shell: bash
       run: |
         ${{ steps.tf_plan_command.outputs.PLAN_COMMAND }} \
-          -var="region=${{ inputs.aws-region }}" \
+          -var="aws_region=${{ inputs.aws-region }}" \
           -var="environment=${{ inputs.environment }}" \
           -no-color \
           -detailed-exitcode \
