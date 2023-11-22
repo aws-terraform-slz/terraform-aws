@@ -80,7 +80,7 @@ jobs:
       - name: Checkout composite actions
         uses: actions/checkout@v4
         with:
-          repository: aws-terraform-slz/terraform-aws/01-slz
+          repository: aws-terraform-slz/terraform-aws
           ref: ${{ inputs.ref }}
           path: composite
       - name: Terraform Init

@@ -30,7 +30,7 @@ runs:
   using: "composite"
   steps:
     - name: Terraform Format and style
-      # working-directory: ${{ inputs.tf-directory}}
+      working-directory: ${{ inputs.tf-directory}}
       id: fmt
       continue-on-error: true
       shell: bash
@@ -57,7 +57,7 @@ runs:
     - name: Terraform Plan
       id: plan
       continue-on-error: true
-      # working-directory: ${{ inputs.tf-directory}}
+      working-directory: ${{ inputs.tf-directory}}
       shell: bash
       run: |
         ${{ steps.tf_plan_command.outputs.PLAN_COMMAND }} \
