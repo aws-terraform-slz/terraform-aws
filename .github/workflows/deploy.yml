@@ -35,8 +35,7 @@ jobs:
       # tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
       environment: "dev"
-      app-directory: "01-slz/"
-      tf-directory: "01-slz/environments/development"
+      tf-directory: "01-slz"
       ref: feature/actions
       local-execution-mode: true
     secrets:

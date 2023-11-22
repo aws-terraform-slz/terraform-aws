@@ -56,10 +56,11 @@ runs:
     - name: Terraform Plan
       id: plan
       continue-on-error: true
-      working-directory: ${{ inputs.tf-directory}}
+      # working-directory: ${{ inputs.tf-directory}}
       shell: bash
       run: |
         ${{ steps.tf_plan_command.outputs.PLAN_COMMAND }} \
+          -var-file=${{ inputs.tf-directory }}/environments/${{ inputs.environment }}.tfvars \
           -var="aws_region=${{ inputs.aws-region }}" \
           -var="environment=${{ inputs.environment }}" \
           -no-color \

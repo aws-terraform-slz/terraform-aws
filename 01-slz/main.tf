@@ -31,7 +31,7 @@ provider "aws" {
 }
 
 module "vpc" {
-  source = "../../modules/vpc"
+  source = "./modules/vpc"
 
   cidr      = var.vpc_cidr
   flow_logs = var.enable_vpc_flow_logs

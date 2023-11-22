@@ -19,12 +19,7 @@ inputs:
   terraform-execution-iam-role-arn:
     required: false
     description: "Terraform Execution IAM Role ARN"
-  setup-python:
-    required: false
-    description: "Python Setup flag"
-  python-version:
-    required: false
-    description: "Python Version"
+
 outputs:
   outcome:
     description: "Terraform init command outcome"
@@ -37,8 +32,6 @@ runs:
       with:
         terraform_version: ${{ inputs.tf-version }}
         terraform_wrapper: ${{ inputs.terraform-wrapper }}
-   
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
       if: ${{ inputs.local-execution-mode == 'true' }}
