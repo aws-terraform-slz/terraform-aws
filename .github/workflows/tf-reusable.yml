@@ -156,9 +156,9 @@ jobs:
     if: ${{ ! inputs.deploy }}
     name: Deactivate Deployment
     runs-on: ubuntu-latest
-    working-directory: ${{ inputs.tf-directory }}
     steps:
       - uses: strumwolf/delete-deployment-environment@v2
+        working-directory: ${{ inputs.tf-directory }}
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           environment: ${{ inputs.environment }}
