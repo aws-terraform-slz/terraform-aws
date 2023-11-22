@@ -144,7 +144,7 @@ jobs:
       - name: Terraform Apply
         run: |
           ${{ steps.tf_apply_command.outputs.APPLY_COMMAND }} \
-            -var-file=${{ inputs.tf-directory }}/environments/${{ inputs.environment }}.tfvars \
+            -var-file=environments/${{ inputs.environment }}.tfvars \
             -var="aws_region=${{ inputs.aws-region }}" \
             -var="environment=${{ inputs.environment }}" \
             -auto-approve \
