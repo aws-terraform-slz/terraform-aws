@@ -7,6 +7,9 @@ inputs:
   aws-region:
     required: true
     description: "AWS Region"
+  tf-directory:
+      required: false
+      description: "Working directory"
   terraform-wrapper:
     required: true
     description: "Terraform Wrapper"
@@ -44,12 +47,8 @@ runs:
         role-session-name: terraform-execution-role
         aws-region: ${{ inputs.aws-region }}
         role-duration-seconds: 1200
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      if: ${{ inputs.setup-python == 'true' }}
-      with:
-        python-version: ${{ inputs.python-version }}
     - name: Terraform Init
       id: init
       shell: bash
+      working-directory: ${{ inputs.tf-directory}}
       run: terraform init
