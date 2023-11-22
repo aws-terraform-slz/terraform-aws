@@ -151,14 +151,15 @@ jobs:
             -input=false \
             ${{ secrets.extra-args }}
 
-  # deactivate-deployment:
-  #   needs: [terraform-apply]
-  #   if: ${{ ! inputs.deploy }}
-  #   name: Deactivate Deployment
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - uses: strumwolf/delete-deployment-environment@v2
-  #       with:
-  #         token: ${{ secrets.GITHUB_TOKEN }}
-  #         environment: ${{ inputs.environment }}
-  #         onlyDeactivateDeployments: true
+  deactivate-deployment:
+    needs: [terraform-apply]
+    if: ${{ ! inputs.deploy }}
+    name: Deactivate Deployment
+    runs-on: ubuntu-latest
+    working-directory: ${{ inputs.tf-directory }}
+    steps:
+      - uses: strumwolf/delete-deployment-environment@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          environment: ${{ inputs.environment }}
+          onlyDeactivateDeployments: true
