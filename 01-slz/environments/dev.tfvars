@@ -2,7 +2,7 @@ aws_availability_zones        = ["us-east-1a", "us-east-1b"] # Optional "ap-sout
 aws_elastic_ip_allocation_ids = ["[YOUR_ELASTIC_IP_ALLOCATION_ID_1]", "[YOUR_ELASTIC_IP_ALLOCATION_ID_2]"]
 aws_region                    = "us-east-1"
 enable_vpc_flow_logs          = false
-environment                   = "d" // d: development, s: staging, p: production
+environment                   = "dev" // d: development, s: staging, p: production
 product                       = "aws-slz-test"
 
 public_subnet_cidrs = {
