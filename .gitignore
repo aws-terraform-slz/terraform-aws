@@ -33,3 +33,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 01-slz/environments/development/.terraform.lock.hcl
+01-slz/.terraform.lock.hcl

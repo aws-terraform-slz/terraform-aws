@@ -93,6 +93,7 @@ jobs:
           terraform-wrapper: true
           local-execution-mode: ${{ inputs.local-execution-mode }}
           terraform-execution-iam-role-arn: ${{ secrets.terraform-execution-iam-plan-role-arn }}
+          environment: ${{ inputs.environment }}
 
       - name: Terraform Plan
         id: plan

@@ -19,6 +19,9 @@ inputs:
   terraform-execution-iam-role-arn:
     required: false
     description: "Terraform Execution IAM Role ARN"
+  environment:
+    required: true
+    description:  "Environment Name"
 
 outputs:
   outcome:
@@ -44,4 +47,4 @@ runs:
       id: init
       shell: bash
       working-directory: ${{ inputs.tf-directory}}
-      run: terraform init
+      run: terraform init -backend-config="config.${{inputs.environment}}.tfbackend"

@@ -8,11 +8,7 @@ terraform {
 
   required_version = "~> 1.0"
 
-  backend "s3" {
-    bucket = "aws-slz"
-    key    = "network/development/terraform.tfstate"
-    region = "us-east-1"
-  }
+  backend "s3" {}
 }
 
 locals {
