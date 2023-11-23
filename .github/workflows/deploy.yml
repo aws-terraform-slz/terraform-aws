@@ -28,7 +28,7 @@ concurrency:
 jobs:
   deploy-dev:
     name: Dev Deployment
-    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml
+    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@main
     with:
       deploy: false
       tf-version: ${{ vars.TF_VERSION }}
@@ -46,7 +46,7 @@ jobs:
 
   deploy-qa:
     name: QA Deployment
-    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml
+    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@main
     with:
       deploy: false
       tf-version: ${{ vars.TF_VERSION }}
