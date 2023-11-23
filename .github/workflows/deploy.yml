@@ -19,7 +19,7 @@ on:
     paths:
       - "**.tf*"
       - ".github/workflows/deploy.yml"
-      - ".github/workflows/tf-reusable.yml"
+      # - ".github/workflows/tf-reusable.yml"
 
 concurrency:
   group: ${{ github.ref }}
@@ -30,13 +30,12 @@ jobs:
     name: Dev Deployment
     uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
     with:
-      deploy: true
+      deploy: false
       tf-version: ${{ vars.TF_VERSION }}
       # tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
       environment: "dev"
       tf-directory: "01-slz"
-      app-directory: "a"
       ref: feature/actions
       local-execution-mode: true
     secrets:
