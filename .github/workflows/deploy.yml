@@ -44,7 +44,7 @@ jobs:
       terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN  }}
       extra-args: ${{ secrets.DEV_EXTRA_ARGS }}
 
-  deploy-qa:
+  # deploy-qa:
     # name: QA Deployment
     # uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
     # with:
