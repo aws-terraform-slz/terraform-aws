@@ -28,15 +28,15 @@ concurrency:
 jobs:
   deploy-dev:
     name: Dev Deployment
-    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
+    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml
     with:
-      deploy: true
+      deploy: false
       tf-version: ${{ vars.TF_VERSION }}
       # tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
       environment: "dev"
       tf-directory: "01-slz"
-      ref: feature/actions
+      ref: main
       local-execution-mode: true
     secrets:
       tf-token: ${{ secrets.TF_TOKEN }}
@@ -46,15 +46,15 @@ jobs:
 
   deploy-qa:
     name: QA Deployment
-    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
+    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml
     with:
-      deploy: true
+      deploy: false
       tf-version: ${{ vars.TF_VERSION }}
       # tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
       environment: "qa"
       tf-directory: "01-slz"
-      ref: feature/actions
+      ref: main
       local-execution-mode: true
     secrets:
       tf-token: ${{ secrets.TF_TOKEN }}
