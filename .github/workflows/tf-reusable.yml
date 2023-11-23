@@ -132,6 +132,7 @@ jobs:
           tf-directory: ${{ inputs.tf-directory }}
           local-execution-mode: ${{ inputs.local-execution-mode }}
           terraform-execution-iam-role-arn: ${{ secrets.terraform-execution-iam-apply-role-arn }}
+          environment: ${{ inputs.environment }}
 
       - name: Define Terraform Apply Command # 'terraform apply' or 'terraform destroy'
         id: tf_apply_command

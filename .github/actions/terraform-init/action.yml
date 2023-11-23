@@ -47,4 +47,4 @@ runs:
       id: init
       shell: bash
       working-directory: ${{ inputs.tf-directory}}
-      run: terraform init -backend-config="config.${{inputs.environment}}.tfbackend"
+      run: terraform init -backend-config="config.${{ inputs.environment }}.tfbackend"
