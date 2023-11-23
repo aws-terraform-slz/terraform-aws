@@ -30,7 +30,7 @@ jobs:
     name: Dev Deployment
     uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
     with:
-      deploy: true
+      deploy: false
       tf-version: ${{ vars.TF_VERSION }}
       # tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
@@ -45,19 +45,19 @@ jobs:
       extra-args: ${{ secrets.DEV_EXTRA_ARGS }}
 
   deploy-qa:
-    name: QA Deployment
-    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
-    with:
-      deploy: true
-      tf-version: ${{ vars.TF_VERSION }}
-      # tf-workspace: ${{ vars.APP_NAME }}-dev
-      aws-region: "us-east-1"
-      environment: "qa"
-      tf-directory: "01-slz"
-      ref: feature/actions
-      local-execution-mode: true
-    secrets:
-      tf-token: ${{ secrets.TF_TOKEN }}
-      terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
-      terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN  }}
-      extra-args: ${{ secrets.DEV_EXTRA_ARGS }}
+    # name: QA Deployment
+    # uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
+    # with:
+    #   deploy: true
+    #   tf-version: ${{ vars.TF_VERSION }}
+    #   # tf-workspace: ${{ vars.APP_NAME }}-dev
+    #   aws-region: "us-east-1"
+    #   environment: "qa"
+    #   tf-directory: "01-slz"
+    #   ref: feature/actions
+    #   local-execution-mode: true
+    # secrets:
+    #   tf-token: ${{ secrets.TF_TOKEN }}
+    #   terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
+    #   terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN  }}
+    #   extra-args: ${{ secrets.DEV_EXTRA_ARGS }}
