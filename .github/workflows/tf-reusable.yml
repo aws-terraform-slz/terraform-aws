@@ -142,6 +142,7 @@ jobs:
             echo "APPLY_COMMAND=terraform destroy" >> $GITHUB_OUTPUT
           fi
       - name: Terraform Apply
+        working-directory: ${{ inputs.tf-directory}}
         run: |
           ${{ steps.tf_apply_command.outputs.APPLY_COMMAND }} \
             -var-file=environments/${{ inputs.environment }}.tfvars \
