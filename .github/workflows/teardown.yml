@@ -1,4 +1,4 @@
-name: Deploy
+name: Destroy
 
 permissions:
   id-token: write # This is required for requesting the JWT
@@ -8,56 +8,48 @@ permissions:
 
 on:
   workflow_dispatch:
-  pull_request:
-    paths:
-      - "**.tf*"
-      - ".github/workflows/deploy.yml"
-  push:
-    branches:
-      - "main"
-      - "feature/actions"
-    paths:
-      - "**.tf*"
-      - ".github/workflows/deploy.yml"
-      # - ".github/workflows/tf-reusable.yml"
 
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
-  deploy-dev:
-    name: Dev Deployment
+  destroy-dev:
+    name: Dev Destroy
     uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@main
     with:
-      deploy: true
+      deploy: false
       tf-version: ${{ vars.TF_VERSION }}
+      # tf-hostname: ${{ vars.TF_HOSTNAME }}
       # tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
       environment: "dev"
-      tf-directory: "01-slz"
       ref: main
       local-execution-mode: true
+      tf-directory: "01-slz"
     secrets:
       tf-token: ${{ secrets.TF_TOKEN }}
       terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
-      terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN  }}
+      terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
       extra-args: ${{ secrets.DEV_EXTRA_ARGS }}
-
-  deploy-qa:
-    name: QA Deployment
+  destroy-qa:
+    needs: destroy-qa
+    name: QA Destroy
     uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@main
     with:
-      deploy: true
+      deploy: false
       tf-version: ${{ vars.TF_VERSION }}
-      # tf-workspace: ${{ vars.APP_NAME }}-dev
-      aws-region: "us-east-1"
+      # tf-organization: ${{ vars.TF_ORGANIZATION }}
+      # tf-hostname: ${{ vars.TF_HOSTNAME }}
+      # tf-workspace: ${{ vars.APP_NAME }}-prod
+      aws-region: "us-east-2"
       environment: "qa"
-      tf-directory: "01-slz"
       ref: main
       local-execution-mode: true
+      tf-directory: "01-slz"
+
     secrets:
       tf-token: ${{ secrets.TF_TOKEN }}
-      terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
-      terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN  }}
-      extra-args: ${{ secrets.DEV_EXTRA_ARGS }}
+      terraform-execution-iam-plan-role-arn: ${{ secrets.PROD_AWS_PLAN_ROLE_ARN }}
+      terraform-execution-iam-apply-role-arn: ${{ secrets.PROD_AWS_APPLY_ROLE_ARN }}
+      extra-args: ${{ secrets.PROD_EXTRA_ARGS }}
