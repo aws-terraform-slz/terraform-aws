@@ -42,7 +42,7 @@ jobs:
       # tf-organization: ${{ vars.TF_ORGANIZATION }}
       # tf-hostname: ${{ vars.TF_HOSTNAME }}
       # tf-workspace: ${{ vars.APP_NAME }}-prod
-      aws-region: "us-east-2"
+      aws-region: "us-east-1"
       environment: "qa"
       ref: main
       local-execution-mode: true
