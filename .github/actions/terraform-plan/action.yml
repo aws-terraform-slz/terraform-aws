@@ -1,0 +1,77 @@
+name: "Terraform Plan"
+description: "Terraform Plan Composite Action"
+inputs:
+  github-token:
+    required: true
+    description: "GitHub Repository Token"
+  deploy:
+    required: true
+    description: "Desired state for the deployment. true=deploy | false=destroy"
+  aws-region:
+    required: true
+    description: "AWS Region"
+  environment:
+    required: true
+    description: "Environment Name"
+  init-outcome:
+    required: true
+    description: "Terraform init command outcome"
+  extra-args:
+    required: false
+    description: "Terraform plan command extra arguments"
+  tf-directory:
+      required: false
+      description: "Working directory"
+outputs:
+  exitcode:
+    description: "Terraform Plan Exit code"
+    value: ${{ steps.plan.outputs.exitcode }}
+runs:
+  using: "composite"
+  steps:
+    - name: Terraform Format and style
+      working-directory: ${{ inputs.tf-directory}}
+      id: fmt
+      continue-on-error: true
+      shell: bash
+      run: terraform fmt -check -diff -recursive
+    - name: Terraform Validate
+      id: validate
+      working-directory: ${{ inputs.tf-directory}}
+      continue-on-error: true
+      shell: bash
+      run: terraform validate -no-color
+    - name: Define Terraform Plan Command # 'terraform plan' or 'terraform plan -destroy'
+      id: tf_plan_command
+      shell: bash
+      run: |
+        if ${{ inputs.deploy }}
+        then
+          echo "PLAN_COMMAND=terraform plan" >> $GITHUB_OUTPUT
+        else
+          echo "PLAN_COMMAND=terraform plan -destroy" >> $GITHUB_OUTPUT
+        fi
+    - name: Add extra arguments mask
+      if: ${{ inputs.extra-args != '' }}
+      shell: bash
+      run: echo "::add-mask::${{ inputs.extra-args }}"
+    - name: Terraform Plan
+      id: plan
+      continue-on-error: true
+      working-directory: ${{ inputs.tf-directory}}
+      shell: bash
+      run: |
+        ${{ steps.tf_plan_command.outputs.PLAN_COMMAND }} \
+          -var-file=environments/${{ inputs.environment }}.tfvars \
+          -var="aws_region=${{ inputs.aws-region }}" \
+          -var="environment=${{ inputs.environment }}" \
+          -no-color \
+          -detailed-exitcode \
+          -input=false \
+          ${{ inputs.extra-args }} | tee plan.out
+
+    - name: Terraform Plan Status
+      if: steps.plan.outcome == 'failure'
+      shell: bash
+      run: exit 1
+      # -var-file=${{ inputs.tf-directory }}/terraform.tfvars \

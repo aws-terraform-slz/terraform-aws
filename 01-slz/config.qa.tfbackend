@@ -1,0 +1,3 @@
+bucket = "aws-slz"
+key    = "network/qa/terraform.tfstate"
+region = "us-east-1"

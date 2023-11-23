@@ -1,0 +1,63 @@
+name: Deploy
+
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+  pull-requests: write # This is required to add comments to Pull Requests
+  deployments: write # This is required to deactivate deployments
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - "**.tf*"
+      - ".github/workflows/deploy.yml"
+  push:
+    branches:
+      - "main"
+      - "feature/actions"
+    paths:
+      - "**.tf*"
+      - ".github/workflows/deploy.yml"
+      # - ".github/workflows/tf-reusable.yml"
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  deploy-dev:
+    name: Dev Deployment
+    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
+    with:
+      deploy: true
+      tf-version: ${{ vars.TF_VERSION }}
+      # tf-workspace: ${{ vars.APP_NAME }}-dev
+      aws-region: "us-east-1"
+      environment: "dev"
+      tf-directory: "01-slz"
+      ref: feature/actions
+      local-execution-mode: true
+    secrets:
+      tf-token: ${{ secrets.TF_TOKEN }}
+      terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
+      terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN  }}
+      extra-args: ${{ secrets.DEV_EXTRA_ARGS }}
+
+  deploy-qa:
+    name: QA Deployment
+    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
+    with:
+      deploy: true
+      tf-version: ${{ vars.TF_VERSION }}
+      # tf-workspace: ${{ vars.APP_NAME }}-dev
+      aws-region: "us-east-1"
+      environment: "qa"
+      tf-directory: "01-slz"
+      ref: feature/actions
+      local-execution-mode: true
+    secrets:
+      tf-token: ${{ secrets.TF_TOKEN }}
+      terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
+      terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN  }}
+      extra-args: ${{ secrets.DEV_EXTRA_ARGS }}
