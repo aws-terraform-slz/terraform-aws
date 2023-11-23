@@ -50,6 +50,6 @@ jobs:
 
     secrets:
       tf-token: ${{ secrets.TF_TOKEN }}
-      terraform-execution-iam-plan-role-arn: ${{ secrets.PROD_AWS_PLAN_ROLE_ARN }}
-      terraform-execution-iam-apply-role-arn: ${{ secrets.PROD_AWS_APPLY_ROLE_ARN }}
+      terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
+      terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
       extra-args: ${{ secrets.PROD_EXTRA_ARGS }}
