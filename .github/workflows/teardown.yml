@@ -33,7 +33,7 @@ jobs:
       terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
       extra-args: ${{ secrets.DEV_EXTRA_ARGS }}
   destroy-qa:
-    needs: destroy-dev
+    # needs: destroy-dev
     name: QA Destroy
     uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@main
     with:
