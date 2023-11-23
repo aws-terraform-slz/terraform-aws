@@ -30,7 +30,7 @@ jobs:
     name: Dev Deployment
     uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
     with:
-      deploy: false
+      deploy: true
       tf-version: ${{ vars.TF_VERSION }}
       # tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
@@ -48,7 +48,7 @@ jobs:
     name: QA Deployment
     uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@feature/actions
     with:
-      deploy: false
+      deploy: true
       tf-version: ${{ vars.TF_VERSION }}
       # tf-workspace: ${{ vars.APP_NAME }}-dev
       aws-region: "us-east-1"
