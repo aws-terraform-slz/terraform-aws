@@ -36,7 +36,7 @@ module "vpc" {
 }
 
 module "igw" {
-  source = "../../modules/internet-gateway"
+  source = "./modules/internet-gateway"
 
   vpc_id = module.vpc.id
 
@@ -45,7 +45,7 @@ module "igw" {
 
 module "public_subnet" {
   for_each            = toset(var.aws_availability_zones)
-  source              = "../../modules/public-subnet"
+  source              = "./modules/public-subnet"
   availability_zone   = each.key
   cidr_block          = var.public_subnet_cidrs[each.key]
   internet_gateway_id = module.igw.id
