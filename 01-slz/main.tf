@@ -57,7 +57,7 @@ module "public_subnet" {
 
 module "nat_gateway" {
   for_each          = toset(var.aws_availability_zones)
-  source            = "../../modules/nat-gateway"
+  source            = "./modules/nat-gateway"
   availability_zone = each.key
   eip_allocation_id = var.aws_elastic_ip_allocation_ids[index(var.aws_availability_zones, each.key)]
   public_subnet_id  = module.public_subnet[each.key].id
@@ -67,7 +67,7 @@ module "nat_gateway" {
 
 module "private_subnet" {
   for_each          = toset(var.aws_availability_zones)
-  source            = "../../modules/private-subnet"
+  source            = "./modules/private-subnet"
   availability_zone = each.key
   cidr_block        = var.private_subnet_cidrs[each.key]
   nat_gateway_id    = module.nat_gateway[each.key].id
