@@ -1,5 +1,7 @@
 aws_availability_zones        = ["us-east-1a", "us-east-1b"] # Optional "ap-southeast-1c"
-aws_elastic_ip_allocation_ids = ["[YOUR_ELASTIC_IP_ALLOCATION_ID_1]", "[YOUR_ELASTIC_IP_ALLOCATION_ID_2]"]
+aws_elastic_ip_allocation_ids = ["eipalloc-07601a9aace046140", "eipalloc-074674cbd201ce16f"]
+# aws_elastic_ip_allocation_ids = ["[YOUR_ELASTIC_IP_ALLOCATION_ID_1]", "[YOUR_ELASTIC_IP_ALLOCATION_ID_2]"]
+
 aws_region                    = "us-east-1"
 enable_vpc_flow_logs          = false
 environment                   = "dev" // d: development, s: staging, p: production

@@ -32,24 +32,24 @@ jobs:
       terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
       terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
       extra-args: ${{ secrets.DEV_EXTRA_ARGS }}
-  destroy-qa:
-    # needs: destroy-dev
-    name: QA Destroy
-    uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@main
-    with:
-      deploy: false
-      tf-version: ${{ vars.TF_VERSION }}
-      # tf-organization: ${{ vars.TF_ORGANIZATION }}
-      # tf-hostname: ${{ vars.TF_HOSTNAME }}
-      # tf-workspace: ${{ vars.APP_NAME }}-prod
-      aws-region: "us-east-1"
-      environment: "qa"
-      ref: main
-      local-execution-mode: true
-      tf-directory: "01-slz"
+  # destroy-qa:
+  #   # needs: destroy-dev
+  #   name: QA Destroy
+  #   uses: aws-terraform-slz/terraform-aws/.github/workflows/tf-reusable.yml@main
+  #   with:
+  #     deploy: false
+  #     tf-version: ${{ vars.TF_VERSION }}
+  #     # tf-organization: ${{ vars.TF_ORGANIZATION }}
+  #     # tf-hostname: ${{ vars.TF_HOSTNAME }}
+  #     # tf-workspace: ${{ vars.APP_NAME }}-prod
+  #     aws-region: "us-east-1"
+  #     environment: "qa"
+  #     ref: main
+  #     local-execution-mode: true
+  #     tf-directory: "01-slz"
 
-    secrets:
-      tf-token: ${{ secrets.TF_TOKEN }}
-      terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
-      terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
-      extra-args: ${{ secrets.PROD_EXTRA_ARGS }}
+  #   secrets:
+  #     tf-token: ${{ secrets.TF_TOKEN }}
+  #     terraform-execution-iam-plan-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
+  #     terraform-execution-iam-apply-role-arn: ${{ secrets.DEV_AWS_PLAN_ROLE_ARN }}
+  #     extra-args: ${{ secrets.PROD_EXTRA_ARGS }}
